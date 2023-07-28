@@ -1,0 +1,17 @@
+name: Run podman
+
+on:
+  workflow_dispatch:
+    inputs:
+      command:
+        description: 'podman command'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+        sudo apt-get update
+        sudo apt-get -y install podman
+        podman version
+        podman ${{ github.event.inputs.command }}
